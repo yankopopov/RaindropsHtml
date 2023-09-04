@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raindrop Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+
+        .raindrop {
+            position: absolute;
+                border-radius: 50%;
+                width: 8px; 
+                height: 8px;
+                border: 1px solid lightblue; /* Setting the border color */
+                animation: growAndFade 1.2s ease-in-out infinite;
+                --size: 8px;  /* Default value, overridden by JavaScript */
+        }
+
+        @keyframes growAndFade {
+            0%, 10% {
+                width: var(--size);
+                height: var(--size);
+                top: calc(var(--top) - var(--size) / 2);
+                left: calc(var(--left) - var(--size) / 2);
+                opacity: 0;
+            }
+            50% {
+                width: calc(3.5 * var(--size));
+                height: calc(3.5 * var(--size));
+                top: calc(var(--top) - 1.75 * var(--size));
+                left: calc(var(--left) - 1.75 * var(--size));
+                opacity: 1;
+            }           
+            90%, 100% {
+                width: calc(6 * var(--size));
+                height: calc(6 * var(--size));
+                top: calc(var(--top) - 3 * var(--size));
+                left: calc(var(--left) - 3 * var(--size));
+                opacity: 0;
+            }
+        }
+     </style>
+</head>
+<body>
+    <!-- Raindrop circles -->
+    <div class="raindrop" id="drop1"></div>
+    <div class="raindrop" id="drop2"></div>
+    <div class="raindrop" id="drop3"></div>
+    <div class="raindrop" id="drop4"></div>
+    <div class="raindrop" id="drop5"></div>
+    <div class="raindrop" id="drop6"></div>
+    <div class="raindrop" id="drop7"></div>
+    <div class="raindrop" id="drop8"></div>
+    <div class="raindrop" id="drop9"></div>
+    <div class="raindrop" id="drop10"></div>
+    <div class="raindrop" id="drop11"></div>
+    <div class="raindrop" id="drop12"></div>
+    <div class="raindrop" id="drop13"></div>
+    <div class="raindrop" id="drop14"></div>
+    <div class="raindrop" id="drop15"></div>
+    <div class="raindrop" id="drop16"></div>
+    <div class="raindrop" id="drop17"></div>
+    <div class="raindrop" id="drop18"></div>
+    <div class="raindrop" id="drop19"></div>
+    <div class="raindrop" id="drop20"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            for (let i = 1; i <= 20; i++) {
+                let drop = document.getElementById(`drop${i}`);
+                positionRandomly(drop);
+                        
+                // Add random animation delay
+                let randomDelay = Math.random() * 1 + 's'; // random delay between 0 to 1 second
+                drop.style.animationDelay = randomDelay;
+
+                // Handle the animation iteration event
+                drop.addEventListener('animationiteration', () => {
+                    positionRandomly(drop);
+                });
+            }
+        });
+
+        function positionRandomly(drop) {
+            let randomTop = Math.random() * (window.innerHeight - 24);
+            let randomLeft = Math.random() * (window.innerWidth - 24);
+            let randomSize = (4 + Math.random() * (10 - 4)) + 'px';  // Random size between 4px and 10px
+
+            drop.style.setProperty('--top', randomTop + 'px');
+            drop.style.setProperty('--left', randomLeft + 'px');
+            drop.style.setProperty('--size', randomSize);
+
+            drop.style.top = `calc(${randomTop}px - ${randomSize} / 2)`;
+            drop.style.left = `calc(${randomLeft}px - ${randomSize} / 2)`;
+        }
+
+
+
+    </script>
+</body>
+</html>
